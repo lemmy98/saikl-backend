@@ -15,9 +15,10 @@ class AddCategoryIdToProducts extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->foreignId("category_id")
-                ->after("id");
-//                ->references("id");
-//                ->on("categories");
+                ->after("id")
+                ->references("id")
+                ->on("categories")
+                ->onDelete('cascade');
         });
     }
 

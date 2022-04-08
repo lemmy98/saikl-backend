@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Category;
 
@@ -15,22 +17,26 @@ class CategoryController extends Controller
             return response()->json("An error occured");
         }
     }
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         try {
             $data = $request->all();
             $category = Category::create($data);
-            return response() -> json($category, 201);
+            return response()->json($category, 201);
         } catch (\Exception $exception) {
-            return response()->json("An error occured");
+            return response()->json("An error occurRed");
+        }
+    }
+
+    public function show($category_id) {
+            $data = Product::where('category_id', $category_id)->get();
+        return response()->json($data, 201);
         }
 
-    //     $data = $request->all();
-    //     return Article::create([
-    //         'title' => $data['title'],
-    //         'body' => $data['body'],
-    //     ]);
+    public function destroy($id) {
 
-    //     $article = Article::save();
-    //    return response()->json($article, 201);
+        Category::where("id", $id)->firstorfail()->delete();
+        return ("Successful delete");
+
     }
 }

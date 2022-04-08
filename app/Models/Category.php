@@ -19,7 +19,9 @@ class Category extends Model
     private $name;
 
     public function products(){
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class, 'product_id');
             // ->orderBy("id","desc");
     }
 }
+//Category::where("id", $id)->firstorfail()->delete();
+//return ("Deleted successfully");

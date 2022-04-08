@@ -37,3 +37,5 @@ Route::post('/shop', [ProductController::class, 'store']);
 //Categories Routes
 Route::get('/shop/category/', [CategoryController::class, 'index']);
 Route::post('/shop/category/', [CategoryController::class, 'store']);
+Route::get('/shop/category/{category_id}', [CategoryController::class, 'show']);
+Route::delete('/shop/category/{category_id}', [CategoryController::class, 'destroy']);
