@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -39,3 +40,11 @@ Route::get('/shop/category/', [CategoryController::class, 'index']);
 Route::post('/shop/category/', [CategoryController::class, 'store']);
 Route::get('/shop/category/{category_id}', [CategoryController::class, 'show']);
 Route::delete('/shop/category/{category_id}', [CategoryController::class, 'destroy']);
+
+
+// Cart Routes
+Route::get('cart', [CartController::class, 'index']);
+Route::post('cart/{id}', [CartController::class, 'addToCart']);
+Route::post('update-cart', [CartController::class, 'updateCart']);
+Route::post('remove', [CartController::class, 'removeCart']);
+Route::post('clear', [CartController::class, 'clearAllCart']);
