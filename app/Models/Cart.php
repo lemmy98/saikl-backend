@@ -9,5 +9,16 @@ class Cart extends Model
 {
     use HasFactory;
 
+    public $table;
 
+    protected $fillable = [
+        'image',
+        'name',
+        'price',
+        'quantity',
+        'description',
+        'releaseDate',
+        'category_id',
+        'product_id'
+    ];
 }
