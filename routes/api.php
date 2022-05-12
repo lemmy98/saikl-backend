@@ -45,6 +45,6 @@ Route::delete('/shop/category/{category_id}', [CategoryController::class, 'destr
 // Cart Routes
 Route::get('/cart', [CartController::class, 'index']);
 Route::post('cart/{id}', [CartController::class, 'addToCart']);
-Route::post('update-cart', [CartController::class, 'updateCart']);
-Route::post('remove', [CartController::class, 'removeCart']);
+Route::patch('update-cart/{id}', [CartController::class, 'updateItemCart']);
+Route::post('remove/', [CartController::class, 'removeCart']);
 Route::post('clear', [CartController::class, 'clearAllCart']);

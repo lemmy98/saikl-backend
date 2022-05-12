@@ -10,7 +10,8 @@ use App\Models\Cart;
 class CartController extends Controller
 {
     public function index() {
-        $cart = session()->get('cart');
+        // $cart = session()->get('cart');
+        $cart = Session::get('cart');
 //        $cart = Cart::all();
 //        session()->get('cart');
 //        dd(session()->get('cart'));
@@ -39,8 +40,9 @@ class CartController extends Controller
 
         $cart = Session::get('cart');
 //        $cart = session()->get()('cart');
-        if(!$cart){
-            $cart[] = [
+//      $!cart === $cart === undefined
+        if($cart == null){
+            $cart[$id] = [
                     "name" => $product->name,
                     "price" => $product->name,
                     "quantity" => 1,
@@ -52,17 +54,17 @@ class CartController extends Controller
             ];
 
 
-            session()->put('cart', $cart);
-//            Session::put('cart',$cart);
-            return response() -> json($cart);
-//            return response()->json("First Product added to cart");
+            // session()->put('cart', $cart);
+            // return response() -> json($cart);
+            Session::put('cart',$cart);
+           return response()->json( "First Product added to cart");
         }
 
         if(isset($cart[$id])){
             $cart[$id]['quantity']++;
 
+            // Session::put('cart', $cart);
             session()->put('cart', $cart);
-
             return response()->json("Product added to cart again");
         }
 
@@ -102,11 +104,25 @@ class CartController extends Controller
 //        return response()->json("product added to cart");
     }
 
-    public function updateCart(){
+    public function updateItemCart(Request $request, $id){
+        $product = Product::find($id);
+        if(!$product){
+            return response()->json('Product not found in Products List', 404);
+        }
+        // $row = Card::get($rowId);
 
+        // Cart::update($rowId, $row->qty + 1);
+        if(isset($cart[$id])){
+            $cart[$id]['quantity']--;
+
+            // Session::put('cart', $cart);
+            session()->put('cart', $cart);
+            return response()->json("Product quantity reduced by 1");
+        }
     }
 
     public function removeCart() {
+        
 
     }
 
