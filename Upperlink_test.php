@@ -14,7 +14,7 @@ function calc($a, $b){
         $newArr = array_slice($array, $a);
         $sum = array_sum($newArr);
     }else {
-        $newArr = array_slice($array, $a, $b);
+        $newArr = array_slice($array, $a, $b-1);
         $sum = array_sum($newArr);
     }
 }
